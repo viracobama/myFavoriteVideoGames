@@ -11,30 +11,32 @@ class WishlistViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var wishlistGames: [Game] = [] {
-            didSet {
-                tableView.reloadData() // Update the table when the array changes
-            }
-        }
+    var wishlistGames: [Game] = []
 
         override func viewDidLoad() {
             super.viewDidLoad()
             tableView.dataSource = self
             tableView.delegate = self
-
-            // Register a default cell (if you're not using a custom prototype)
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "GameCell")
-
-            // Initial load of wishlist games
             wishlistGames = GameManager.shared.wishlistGames
         }
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            wishlistGames = GameManager.shared.wishlistGames // Reload when returning to screen
+            wishlistGames = GameManager.shared.wishlistGames
+            tableView.reloadData()
+        }
+
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "showGameDetail",
+               let detailVC = segue.destination as? GamesDetailViewController,
+               let selectedGame = sender as? Game {
+                detailVC.game = selectedGame
+            }
         }
     }
 
+    // MARK: - UITableViewDataSource
     extension WishlistViewController: UITableViewDataSource {
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,23 +52,28 @@ class WishlistViewController: UIViewController {
 
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if editingStyle == .delete {
-                // Remove the game from the wishlist and update the table view
                 let gameToDelete = wishlistGames[indexPath.row]
-                GameManager.shared.wishlistGames.removeAll { $0.id == gameToDelete.id }
 
-                // Update the local wishlistGames array
+                // Update GameManager's data
+                var currentGames = GameManager.shared.wishlistGames
+                currentGames.removeAll { $0.id == gameToDelete.id }
+                GameManager.shared.wishlistGames = currentGames
+
+                // Update the local array BEFORE deleting the row
                 wishlistGames.remove(at: indexPath.row)
 
-                // Delete the row from the table view with an animation
+                // Delete the row from the table view
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
         }
     }
 
+    // MARK: - UITableViewDelegate
     extension WishlistViewController: UITableViewDelegate {
+        
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let game = wishlistGames[indexPath.row]
-            print("Selected game from wishlist: \(game.name)")
+            let selectedGame = wishlistGames[indexPath.row]
+            performSegue(withIdentifier: "showGameDetail", sender: selectedGame)
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }

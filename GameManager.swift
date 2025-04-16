@@ -44,13 +44,14 @@ class GameManager {
 
     private init() {}
 
+    // Update a played game (e.g., review or rating)
     func updatePlayedGame(at index: Int, with updatedGame: Game) {
         var currentGames = playedGames
         currentGames[index] = updatedGame
         playedGames = currentGames
     }
 
-    // New method to add a game to the wishlist
+    // Add a game to the wishlist
     func addGameToWishlist(game: Game) {
         var currentGames = wishlistGames
         if !currentGames.contains(where: { $0.id == game.id }) {
@@ -59,12 +60,19 @@ class GameManager {
         }
     }
 
-    // New method to add a game to the played games
+    // Add a game to the played games
     func addGameToPlayed(game: Game) {
         var currentGames = playedGames
         if !currentGames.contains(where: { $0.id == game.id }) {
             currentGames.append(game)
             playedGames = currentGames
         }
+    }
+
+    // Remove a game from played games
+    func removeGameFromPlayed(game: Game) {
+        var currentGames = playedGames
+        currentGames.removeAll { $0.id == game.id }
+        playedGames = currentGames
     }
 }

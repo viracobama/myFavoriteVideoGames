@@ -64,28 +64,39 @@ class PlayedViewController: UIViewController {
             let game = playedGames[indexPath.row]
             print("Tapped on game: \(game.name)")
 
-            // Prompt the user to input a review
-            let alertController = UIAlertController(title: "Add Review", message: "Write a review for \(game.name)", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Add Review", message: "Write a review and rating for \(game.name)", preferredStyle: .alert)
+
             alertController.addTextField { textField in
                 textField.text = game.review
                 textField.placeholder = "Enter your review here"
             }
-            
+
+            alertController.addTextField { textField in
+                if let rating = game.rating {
+                    textField.text = "\(rating)"
+                }
+                textField.placeholder = "Enter rating (1-10)"
+                textField.keyboardType = .numberPad
+            }
+
             let submitAction = UIAlertAction(title: "Submit", style: .default) { _ in
-                guard let review = alertController.textFields?.first?.text else { return }
+                guard let review = alertController.textFields?[0].text,
+                      let ratingText = alertController.textFields?[1].text,
+                      let rating = Int(ratingText), (1...10).contains(rating) else { return }
+
                 var updatedGame = game
                 updatedGame.review = review
-                GameManager.shared.updatePlayedGame(at: indexPath.row, with: updatedGame)
+                updatedGame.rating = rating
 
-                // Reload the table view to reflect the review update
+                GameManager.shared.updatePlayedGame(at: indexPath.row, with: updatedGame)
                 tableView.reloadData()
             }
-            
+
             alertController.addAction(submitAction)
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
+
             present(alertController, animated: true)
-            
             tableView.deselectRow(at: indexPath, animated: true)
         }
+
     }

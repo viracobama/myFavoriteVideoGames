@@ -11,6 +11,7 @@
 //
 //  Created by Virac Bou on 4/10/25.
 //
+//  Uses closure (API Integration) in line 22
 
 import Foundation
 
