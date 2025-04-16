@@ -85,7 +85,8 @@ Look at wireframe above.
 ### Networking
 
 - [Add list of network requests by screen ]
-- <img src="https://imgur.com/a/9U1zAyw" width:600>
+- <img src="https://github.com/viracobama/myFavoriteVideoGames/blob/main/images/network_request_1.png" width:600>
+- <img src="https://github.com/viracobama/myFavoriteVideoGames/blob/main/images/network_request_2.png" width:600>
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
 - endpoint: https://igdb-proxy-cc7025ef17a0.herokuapp.com/search is a proxied verion of https://api.igdb.com/v4/search which is hosted heroku.com
