@@ -82,6 +82,9 @@ Look at wireframe above.
 
 [Add table of models]
 
+### Video Demonstration Link
+https://www.loom.com/share/d6c31191833646b5b01158af7141d2f6
+
 ### Networking
 
 - [Add list of network requests by screen ]
