@@ -1,7 +1,7 @@
-Original App Design Project - README 
+myFavoriteVideoGames App Design Project - README 
 ===
 
-# myFavoriteVideoGame
+# myFavoriteVideoGames
 
 ## Table of Contents
 
