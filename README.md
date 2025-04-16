@@ -71,7 +71,8 @@ Original Concept
 
 ### [BONUS] Digital Wireframes & Mockups
 Final Wireframe
-[<img src="MyFavoriteVideoGames Wireframe.jpg" width=600>](https://github.com/viracobama/myFavoriteVideoGames/blob/main/MyFavoriteVideoGames%20Wireframe.jpg)
+<img src="https://github.com/viracobama/myFavoriteVideoGames/blob/main/images/MyFavoriteVideoGames%20Wireframe.jpg" width=600>
+
 ### [BONUS] Interactive Prototype
 
 ## Schema 
@@ -83,7 +84,7 @@ Look at wireframe above.
 [Add table of models]
 
 ### Video Demonstration Link
-https://www.loom.com/share/d6c31191833646b5b01158af7141d2f6
+[https://www.loom.com/share/d6c31191833646b5b01158af7141d2f6](https://www.loom.com/share/08188dfe104a4e09b7e183ba909f906d?sid=b1cb7a4b-99bd-4d7b-adaa-c9f4f4f7f9ee)
 
 ### Networking
 
